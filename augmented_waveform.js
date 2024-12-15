@@ -1,12 +1,9 @@
 import VFibDataArray from './data.js';
 
 const dataArray = VFibDataArray;
+
 const canvas = document.getElementById('augmentedECGCanvas');
 const ctx = canvas.getContext('2d');
-
-function getRandomValue(min, max) {
-    return Math.random() * (max - min) + min;
-}
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
@@ -17,6 +14,21 @@ const timeScale = 4;
 
 // Animation variables
 let offset = 0; // This variable is use to track the horizontal scrolling
+
+//This variable is for adding randomness for each datapoint
+let randomOffsets = new Array(dataArray.length).fill(0);    
+
+function getRandomValue(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function updateRandomOffsets() {
+    // We update random values for each point in the dataArray. This is done at the start of everyloop.
+    for (let i = 0; i < dataArray.length; i++) {
+        randomOffsets[i] = getRandomValue(-dataArray[i] * 0.5, dataArray[i] * 0.5);
+        console.log(randomOffsets[i]);
+    }
+}
 
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -44,8 +56,8 @@ function drawECG() {
 
     for (let x = 0; x <= canvasWidth; x++) {
         let dataIndex = Math.floor((x + offset) / timeScale) % dataArray.length;
-        let yValue = startY - dataArray[dataIndex] * amplitudeScale;
-        if (yValue >= startY - 482.897384305839 * amplitudeScale) {
+        let yValue = startY - (dataArray[dataIndex] +  randomOffsets[dataIndex]) * amplitudeScale;
+        if (yValue >= startY - 1000 * amplitudeScale) {
             if (x === 0) {
                 ctx.moveTo(x, yValue);
             } else {
@@ -57,6 +69,9 @@ function drawECG() {
     ctx.stroke();
 
     offset = (offset + 1) % (dataArray.length * timeScale);
+    if (offset === 1) {
+        updateRandomOffsets();
+    }
 
     requestAnimationFrame(drawECG);
 }
