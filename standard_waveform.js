@@ -8,8 +8,8 @@ const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
 // These are scaling factors
-const amplitudeScale = 0.25; 
-const timeScale = 4; 
+const amplitudeScale = 0.1; 
+const timeScale = 2; 
 
 // Animation variables
 let offset = 0; // This variable is use to track the horizontal scrolling
