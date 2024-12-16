@@ -1,4 +1,4 @@
-ECG Waveform Synthetic Data Generator
+# ECG Waveform Synthetic Data Generator
 
-# First experiment with Ventricular Fibrillator.
+## First experiment with Ventricular Fibrillator.
 Will update soon!
