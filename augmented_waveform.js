@@ -1,4 +1,5 @@
 import VFibDataArray from './data.js';
+import { amplitudeScale, timeScale } from './scale_slide.js';
 
 const dataArray = VFibDataArray;
 
@@ -7,10 +8,6 @@ const ctx = canvas.getContext('2d');
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
-
-// These are scaling factors
-const amplitudeScale = 0.1; 
-const timeScale = 2; 
 
 // Animation variables
 let offset = 0; // This variable is use to track the horizontal scrolling
