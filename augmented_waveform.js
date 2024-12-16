@@ -21,6 +21,10 @@ let randomOffsets = new Array(dataArray.length).fill(0);
 //This array is for adding randomness for a whole section. I expect to make 5 sections.
 let randomSectionOffsets = new Array(dataArray.length).fill(0);
 
+//This array is for adding noise to 1 whole loop. 1 noise last for 20 data point, which is 2 seconds. We intend to add 1 to 2 noises per loop.
+let noiseArray = dataArray;
+let noisePositions = [];
+
 function getRandomValue(min, max) {
     return Math.random() * (max - min) + min;
 }
@@ -29,6 +33,22 @@ function updateRandomOffsets() {
     // We update random values for each point in the dataArray. This is done at the start of everyloop.
     for (let i = 0; i < dataArray.length; i++) {
         randomOffsets[i] = getRandomValue(-dataArray[i] * 0.5, dataArray[i] * 0.5);
+    }
+}
+
+function updateNoise() {
+    noisePositions = []; // Reset noise position.
+    noiseArray = [...dataArray]; // We reset noise array.
+
+    // Here, we randomly add 1 or 2 noise segments per loop
+    const numberOfNoises = Math.floor(getRandomValue(1, 3));
+    for (let n = 0; n < numberOfNoises; n++) {
+        const noiseStartPosition = Math.floor(getRandomValue(0, dataArray.length - 20));
+        noisePositions.push({ start: noiseStartPosition, end: noiseStartPosition + 19 });
+
+        for (let i = noiseStartPosition; i <= noiseStartPosition + 19; i++) {
+            noiseArray[i] = getRandomValue(-2000, 3000);
+        }
     }
 }
 
@@ -52,6 +72,7 @@ function updateSectionRandomOffsets() {
         }
     }
 }
+
 
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -81,7 +102,7 @@ function drawECG() {
     //This is where we start drawing our ECG waveform.
     for (let x = 0; x <= canvasWidth; x++) {
         let dataIndex = Math.floor((x + offset) / timeScale) % dataArray.length;
-        let yValue = startY - (dataArray[dataIndex] +  randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
+        let yValue = startY - (noiseArray[dataIndex] +  randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
         if (yValue >= startY - 1000 * amplitudeScale) {
             if (x === 0) {
                 ctx.moveTo(x, yValue);
@@ -97,7 +118,8 @@ function drawECG() {
     if (offset === 1) {
         updateRandomOffsets();
         updateSectionRandomOffsets();
-        console.log(randomSectionOffsets);
+        updateNoise();
+        //console.log(randomSectionOffsets);
     }
 
     requestAnimationFrame(drawECG);
