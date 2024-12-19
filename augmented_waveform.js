@@ -53,7 +53,7 @@ function updateNoise() {
 
 let startEndIndexArray = [];
 
-const numberOfSection = 3;
+const numberOfSection = 4;
 const sectionWidth = (dataArray.length - dataArray.length % numberOfSection) / numberOfSection;
 let parabolaConstant = 0.05;
 function updateSectionRandomOffsets() {
@@ -66,12 +66,10 @@ function updateSectionRandomOffsets() {
             ? dataArray.length //In case the last section do not have enough number of elements equal to sectionWidth.
             : sectionStart + sectionWidth;
         startEndIndexArray.push(sectionStart, sectionEnd);
-
-        if (sectionIndex % 2 === 0) sectionRandomOffset = getRandomValue(0, 1000);
-        else if (sectionIndex % 2 === 1) sectionRandomOffset = getRandomValue(-1000, 0);
+        parabolaConstant = getRandomValue(0.01, 0.04);
 
         // We apply the random offset to all indices in this section
-        if (sectionRandomOffset > 0) {
+        if (sectionIndex % 2 == 0) {
             for (let i = sectionStart; i < sectionEnd; i++) {
                 randomSectionOffsets[i] = (sectionWidth/2)*(sectionWidth/2)*parabolaConstant - parabolaConstant * (i - sectionStart - sectionWidth/2) * (i - sectionStart - sectionWidth/2);
             }
