@@ -66,7 +66,7 @@ function updateSectionRandomOffsets() {
             ? dataArray.length //In case the last section do not have enough number of elements equal to sectionWidth.
             : sectionStart + sectionWidth;
         startEndIndexArray.push(sectionStart, sectionEnd);
-        parabolaConstant = getRandomValue(0.01, 0.04);
+        parabolaConstant = getRandomValue(0.02, 0.05);
 
         // We apply the random offset to all indices in this section
         if (sectionIndex % 2 == 0) {
