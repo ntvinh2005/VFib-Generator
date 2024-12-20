@@ -1,7 +1,7 @@
 import VFibDataArray from './data.js';
 import { amplitudeScale, timeScale } from './scale_slide.js';
 
-const dataArray = VFibDataArray;
+let dataArray = VFibDataArray;
 
 const canvas = document.getElementById('augmentedECGCanvas');
 const ctx = canvas.getContext('2d');
@@ -91,6 +91,64 @@ function drawRedLine(x) {
     ctx.stroke();
 }
 
+// This shuffle function uses the Fisher-Yates algorithm.
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // This allows us to choose a random index from 0 to i.
+        [array[i], array[j]] = [array[j], array[i]]; // We swap elements at i and j.
+    }
+    return array;
+}
+
+function updateRandomShuffle() {
+    let currentArray = [];
+    let positiveArray = [];
+    let negativeArray = [];
+    let isPositive = (dataArray[0] > 0);
+
+    // First, divide the array into 2 separated arrays: positive and negative sections
+    for (let i = 0; i < dataArray.length; i++) {
+        currentArray.push(dataArray[i]);
+
+        // Check if the sign changes from positive to negative or vice versa
+        if ((dataArray[i] > 0) !== isPositive) {
+            isPositive = !isPositive;
+            if (isPositive) {
+                positiveArray.push(currentArray); // Store the section
+            } else {
+                negativeArray.push(currentArray); // Store the section
+            }
+            currentArray = [];
+        }
+    }
+
+    // If the last segment is positive or negative, push it to the respective array
+    if (currentArray.length > 0) {
+        if (isPositive) {
+            positiveArray.push(currentArray);
+        } else {
+            negativeArray.push(currentArray);
+        }
+    }
+
+    // Here we shuffle both the positive and negative arrays (shuffle the sections inside each array) using Fisher-Yates method.
+    shuffleArray(positiveArray);
+    shuffleArray(negativeArray);
+
+    // Now, we will merge the arrays alternatively: one section from positiveArray and then one from negativeArray and then continue like that
+    dataArray = [];
+    let maxLength = Math.max(positiveArray.length, negativeArray.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (i < positiveArray.length) {
+            dataArray = dataArray.concat(positiveArray[i]);
+        }
+        if (i < negativeArray.length) {
+            dataArray = dataArray.concat(negativeArray[i]);
+        }
+    }
+}
+
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -124,7 +182,7 @@ function drawECG() {
 
     for (let x = 0; x <= canvasWidth; x++) {
         const dataIndex = Math.floor((x + offset) / timeScale) % dataArray.length;
-        const yValue = startY - (noiseArray[dataIndex] + randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
+        const yValue = startY - (dataArray[dataIndex] + randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
 
         if (yValue >= startY - 1000 * amplitudeScale) {
             if (x === 0) {
@@ -139,8 +197,9 @@ function drawECG() {
 
     offset = (offset + 1) % (dataArray.length * timeScale);
     if (offset === 1) {
-        updateSectionRandomOffsets();
-        console.log(randomSectionOffsets);
+        //updateSectionRandomOffsets();
+        updateRandomShuffle();
+        console.log(dataArray)
     }
 
     requestAnimationFrame(drawECG);
