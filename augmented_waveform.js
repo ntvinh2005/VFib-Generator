@@ -95,7 +95,7 @@ function drawRedLine(x) {
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)); // This allows us to choose a random index from 0 to i.
-        [array[i], array[j]] = [array[j], array[i]]; // We swap elements at i and j.
+        [array[i], array[j]] = [array[j], array[i]]; // Then, swap.
     }
     return array;
 }
@@ -110,19 +110,18 @@ function updateRandomShuffle() {
     for (let i = 0; i < dataArray.length; i++) {
         currentArray.push(dataArray[i]);
 
-        // Check if the sign changes from positive to negative or vice versa
         if ((dataArray[i] > 0) !== isPositive) {
             isPositive = !isPositive;
             if (isPositive) {
-                positiveArray.push(currentArray); // Store the section
+                positiveArray.push(currentArray); 
             } else {
-                negativeArray.push(currentArray); // Store the section
+                negativeArray.push(currentArray);
             }
             currentArray = [];
         }
     }
 
-    // If the last segment is positive or negative, push it to the respective array
+    // Check if the last segment is positive or negative, then push.
     if (currentArray.length > 0) {
         if (isPositive) {
             positiveArray.push(currentArray);
