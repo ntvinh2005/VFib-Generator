@@ -22,3 +22,4 @@ Demo live version is here: https://ntvinh2005.github.io/Projects/ECG-waveform-sy
 ## Update in future (soon)
 * Add slide to adjust customizable variables like amplitude scales, time scales, number of noises per loop, etc.
 * Experiment with other types of waveform like AFib.
+* Try generating VFib data from scratch without the need of original data
