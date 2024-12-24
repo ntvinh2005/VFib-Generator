@@ -196,7 +196,7 @@ function drawECG() {
 
     offset = (offset + 1) % (dataArray.length * timeScale);
     if (offset === 1) {
-        //updateSectionRandomOffsets();
+        updateSectionRandomOffsets();
         updateRandomShuffle();
         console.log(dataArray)
     }
