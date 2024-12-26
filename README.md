@@ -12,8 +12,9 @@ This project generates synthetic ECG waveforms with:
 * Customizable Amplitude and Noise: Generate ECG data with variable scaling and noise intensity for testing purposes. There will be 1 to 3 noises per loop.
 * Random offset: Add random offset for each data point and common random offset for a whole section. There will be five sections in a waveform loop. Can add randomness to the width of each sections as well as the number of it later
 * Random shuffle section: Shuffle randomly for different sections in the original VFib data but still keeps the overall sinus rhythm shape.
-* Dynamic Noise Injection: Simulate irregularities with 1–2 noise bursts per waveform loop. A noise will last 20 second. Can add randomness to how long a noise last later.
-* Grid and Indicators: A grid net for distinguising the different between the original waveform and the new augmented waveform.
+* Dynamic Noise Injection: Simulate irregularities with 1–2 noise bursts per waveform loop. A noise will last 20 second. Can add randomness to how long a noise last later. (Currently turn off since produced data is unrealistic and not general enough for machine learning)
+* Grid and Indicators: A grid net for distinguising the different between the original waveform and the new augmented waveform. (Can be turned off for producing image data for machine learning)
+* Scale slide: Change amplitude and time scale for better visualization.
 * Real-Time Animation: Smooth scrolling waveforms visualized in a canvas element.
 
 ## Demo
