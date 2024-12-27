@@ -20,8 +20,8 @@ This project generates synthetic ECG waveforms experimenting with two separate a
 
 ## Demo
 Demo live version is here: 
-First Approach (Augment a real life sample of VFib to create more augmented version): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_augmented.html. Latest update in 12/23/2024. 
-Second Approach (Generating random sinus then try to augment to simulate Ventricular Fibrillation): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_gen.html. Latest update in 12/26/2024.
+* First Approach (Augment a real life sample of VFib to create more augmented version): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_augmented.html. Latest update in 12/23/2024. 
+* Second Approach (Generating random sinus then try to augment to simulate Ventricular Fibrillation): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_gen.html. Latest update in 12/26/2024.
 
 ## Update in future (soon)
 * Experiment with other types of waveform like AFib.
