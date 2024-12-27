@@ -2,8 +2,9 @@
 A tool for generating synthetic ECG waveforms, with features such as noise injection and random amplitude variations, designed to simulate ventricular fibrillation and other conditions for analysis and experimentation.
 
 ## Overview
-This project generates synthetic ECG waveforms with:
+This project generates synthetic ECG waveforms experimenting with two separate approaches:
 * Realistic waveform shapes based on sample data. There will be 2 waveforms displayed: Original waveform and the new augmented waveform. Each datapoint in the sample data array represent 0.01 seconds.
+* Generate original waveform by generating a random sinus waveform with random half period and random amplitude. Then adding random offset to simulate Ventricular Fibrillation waveform.
 * Noise injection for testing anomaly detection algorithms.
 * Customizable parameters such as amplitude, noise, and randomness.
 * Initial focus: Ventricular Fibrillation (VF).
