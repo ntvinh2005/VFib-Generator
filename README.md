@@ -19,9 +19,10 @@ This project generates synthetic ECG waveforms experimenting with two separate a
 * Real-Time Animation: Smooth scrolling waveforms visualized in a canvas element.
 
 ## Demo
-Demo live version is here: https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_sim.html. Latest update in 12/14/2024
+Demo live version is here: 
+First Approach (Augment a real life sample of VFib to create more augmented version): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_augmented.html. Latest update in 12/23/2024. 
+Second Approach (Generating random sinus then try to augment to simulate Ventricular Fibrillation): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_gen.html. Latest update in 12/26/2024.
 
 ## Update in future (soon)
-* Add slide to adjust customizable variables like amplitude scales, time scales, number of noises per loop, etc.
 * Experiment with other types of waveform like AFib.
-* Try generating VFib data from scratch without the need of original data
+* Try generating VFib data from scratch without the need of original data. (In progress)
