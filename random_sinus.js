@@ -15,15 +15,15 @@ function generateRandomSinus() {
     let endIndex = 0;
     let evenOrOdd = false;
     while (index < expectedDataLength) {
-        let currentHalfPeriod = Math.floor(getRandomValue(avgPeriod - avgPeriod * 0.6, avgPeriod + avgPeriod * 0.3));
+        let currentHalfPeriod = Math.floor(getRandomValue(avgPeriod - avgPeriod * 0.6, avgPeriod + avgPeriod * 0.1));
         let offsetArr = new Array(currentHalfPeriod).fill(0);
-        let peakIndex = getRandomValue(Math.floor(currentHalfPeriod / 2) - 5, Math.floor(currentHalfPeriod / 2) + 5);
+        let peakIndex = getRandomValue(Math.floor(currentHalfPeriod / 2) - 6, Math.floor(currentHalfPeriod / 2) + 6);
         let currentAmplitude;
-        if (evenOrOdd) currentAmplitude = getRandomValue(50, 400);
+        if (evenOrOdd) currentAmplitude = getRandomValue(50, 370);
         else currentAmplitude = getRandomValue(-400, -50);
 
         // Setting value for the offset value array. The data point for offset will create linear graph (look like a roof).
-        let peakVal = getRandomValue(0.3*currentAmplitude, 0.7*currentAmplitude);
+        let peakVal = getRandomValue(0.3*currentAmplitude, 0.6*currentAmplitude);
         let slope1 = peakVal / peakIndex;
         let slope2 = peakVal / (currentHalfPeriod - peakIndex - 1);
         for (let i = 0; i < currentHalfPeriod; i++) {
@@ -38,6 +38,8 @@ function generateRandomSinus() {
         while (index < endIndex) {
             dataArray[index] = currentAmplitude - parabolaConst * (currentHalfPeriod / 2 - (currentHalfPeriod - (endIndex - index))) * (currentHalfPeriod / 2 - (currentHalfPeriod - (endIndex - index)));
             dataArray[index] += offsetArr[index - (endIndex - currentHalfPeriod)];
+
+            //This to add little peak randomly somewhere in the sinus graph (kinda a small noise)
             if (Math.floor(getRandomValue(1, 25)) == 10 && (index < Math.floor(endIndex - currentHalfPeriod /2) - 4 || index > Math.floor(endIndex - currentHalfPeriod/2) + 5)) {
                 dataArray[index] += getRandomValue(0.15 * currentAmplitude, 0.7 * currentAmplitude);
                 console.log("Congratulation");
