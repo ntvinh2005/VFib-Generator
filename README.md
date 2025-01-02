@@ -2,8 +2,9 @@
 A tool for generating synthetic ECG waveforms, with features such as noise injection and random amplitude variations, designed to simulate ventricular fibrillation and other conditions for analysis and experimentation.
 
 ## Overview
-This project generates synthetic ECG waveforms with:
+This project generates synthetic ECG waveforms experimenting with two separate approaches:
 * Realistic waveform shapes based on sample data. There will be 2 waveforms displayed: Original waveform and the new augmented waveform. Each datapoint in the sample data array represent 0.01 seconds.
+* Generate original waveform by generating a random sinus waveform with random half period and random amplitude. Then adding random offset to simulate Ventricular Fibrillation waveform.
 * Noise injection for testing anomaly detection algorithms.
 * Customizable parameters such as amplitude, noise, and randomness.
 * Initial focus: Ventricular Fibrillation (VF).
@@ -18,9 +19,10 @@ This project generates synthetic ECG waveforms with:
 * Real-Time Animation: Smooth scrolling waveforms visualized in a canvas element.
 
 ## Demo
-Demo live version is here: https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_sim.html. Latest update in 12/14/2024
+Demo live version is here: 
+* First Approach (Augment a real life sample of VFib to create more augmented version): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_augmented.html. Latest update in 12/23/2024. 
+* Second Approach (Generating random sinus then try to augment to simulate Ventricular Fibrillation): https://ntvinh2005.github.io/Projects/ECG-waveform-synthetic-data-generator/VFib_gen.html. Latest update in 12/26/2024.
 
 ## Update in future (soon)
-* Add slide to adjust customizable variables like amplitude scales, time scales, number of noises per loop, etc.
 * Experiment with other types of waveform like AFib.
-* Try generating VFib data from scratch without the need of original data
+* Try generating VFib data from scratch without the need of original data. (In progress)
