@@ -148,6 +148,19 @@ function updateRandomShuffle() {
     }
 }
 
+async function sendDataToServer(data) {
+    const response = await fetch('http://localhost:3000/export', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data, filename: 'augmented_ecg_data' })
+    });
+
+    const result = await response.text();
+    console.log(result);
+}
+
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -198,7 +211,8 @@ function drawECG() {
     if (offset === 1) {
         updateSectionRandomOffsets();
         updateRandomShuffle();
-        console.log(dataArray)
+        console.log(dataArray);
+        sendDataToServer(dataArray);
     }
 
     requestAnimationFrame(drawECG);
