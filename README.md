@@ -17,6 +17,7 @@ This project generates synthetic ECG waveforms experimenting with two separate a
 * Grid and Indicators: A grid net for distinguising the different between the original waveform and the new augmented waveform. (Can be turned off for producing image data for machine learning)
 * Scale slide: Change amplitude and time scale for better visualization.
 * Real-Time Animation: Smooth scrolling waveforms visualized in a canvas element.
+* Streamline the synthetic data to csv file on local in real time using simple express server.
 
 ## Demo
 Demo live version is here: 
