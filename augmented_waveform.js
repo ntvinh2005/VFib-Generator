@@ -167,6 +167,14 @@ async function sendDataToServer(data) {
 
 let dataUpdated = false;
 
+let transformedArray = [];
+
+function updateTransformedArray() {
+    transformedArray = dataArray.map((value, index) => {
+        return value + randomOffsets[index] + randomSectionOffsets[index];
+    });
+}
+
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -218,11 +226,16 @@ function drawECG() {
         updateSectionRandomOffsets();
         updateRandomShuffle();
         console.log(dataArray);
+        updateTransformedArray();
         dataUpdated = true;
     }
 
     requestAnimationFrame(drawECG);
 }
 
+updateRandomOffsets();
+updateSectionRandomOffsets();
+updateNoise();
+updateTransformedArray();
 drawECG();
-setInterval(() => sendDataToServer(dataArray), 4000);
+setInterval(() => sendDataToServer(transformedArray), 4000);
