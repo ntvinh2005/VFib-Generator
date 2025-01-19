@@ -26,3 +26,5 @@ Demo live version is here:
 ## Update in future (soon)
 * Experiment with other types of waveform like AFib.
 * Try generating VFib data from scratch without the need of original data. (In progress)
+* Start automatically capture the screenshot of waveform and try to train the model based on the synthetic data
+* Try finding more original real data for generate augmented synthetic data.
